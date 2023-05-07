@@ -1,0 +1,34 @@
+{% load static %}
+<nav class="w-full flex justify-center items-center py-4 px-5 fixed z-50">
+    <div class="w-6/12">
+        <a href="/">
+            <img class="w-2,5/12" src="{% static 'images/hashflix.png' %}" >
+        </a>
+    </div>
+
+    {% if user.is_authenticated %}
+     <div class="w-6/12 flex flexnowrap justify-end">
+        <div class="m-3">
+            <form method="get" action="{% url 'filme:pesquisafilme' %}">
+                <input type="text" class="py-1 px-2 rounded-md text-black rounded-md" name="query" placeholder="Pesquisar...">
+                <input type="submit" value="">
+            </form>
+        </div>
+        <a href="{% url 'filme:logout' %}">
+            <div class="m-3">
+                <button class="bg-red-600 text-white py-1 px-3 rounded-md">Sair</button>
+            </div>
+        <a href="{% url 'filme:editarperfil' user.pk %}">
+            <div class="m-3">
+                <button class="bg-red-600 text-white py-1 px-3 rounded-md">Editar Perfil</button>
+            </div>
+        </a>
+    </div>
+    {% else %}
+    <a href="{% url 'filme:login' %}">
+        <div class="m-3">
+            <button class="bg-red-600 text-white py-2 px-4 rounded-md">Entrar</button>
+        </div>
+         </a>
+    {% endif %}
+</nav>
